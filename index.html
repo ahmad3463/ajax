@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ajax </title>
+</head>
+<body>
+
+    <button id="button">get file</button>
+
+
+    <script>
+        document.getElementById('button').addEventListener('click' , loadText);
+
+        function loadText(){
+            let xhr = new XMLHttpRequest;
+
+            // console.log(xhr);
+            xhr.open('GET' , 'sample.txt' , true);
+
+            xhr.onload = function(){
+                if(this.status == 200){
+                    // console.log(this.responseText);
+                }
+            }
+            xhr.send();
+        }
+
+    </script>
+    
+</body>
+</html>
