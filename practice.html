@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>practice</title>
+</head>
+<body>
+        <button id="button">load Data</button>
+
+        <div id="div"></div>
+        
+        <script>
+           let button = document.getElementById('button');
+            button.addEventListener('click', loadData);
+
+            function loadData(){
+                let xhr = new XMLHttpRequest;
+
+                xhr.open('GET' , 'sample.txt' , true);
+
+                // xhr.onreadystatechange = () => {
+                //     if(xhr.readyState == 4 && xhr.status == 200){
+                //         document.getElementById('div').innerHTML = xhr.responseText;
+                //     }else{
+                //         document.getElementById('div').innerHTML = xhr.status;
+                //     }
+                // }
+
+                xhr.onreadystatechange = () => {
+                    if(xhr.readyState == 4){
+                        if(xhr.status == 200){
+                            document.getElementById('div').innerHTML = xhr.responseText;
+                        }else{
+                            document.getElementById('div').innerHTML = xhr.status;
+
+                        }
+                    }
+                }
+                xhr.send();
+            }
+        </script>
+</body>
+</html>
