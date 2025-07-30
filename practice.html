@@ -19,16 +19,13 @@
 
                 xhr.open('GET' , 'sample.txt' , true);
 
-                // xhr.onreadystatechange = () => {
-                //     if(xhr.readyState == 4 && xhr.status == 200){
-                //         document.getElementById('div').innerHTML = xhr.responseText;
-                //     }else{
-                //         document.getElementById('div').innerHTML = xhr.status;
-                //     }
-                // }
-
                 xhr.onreadystatechange = () => {
-                    if(xhr.readyState == 4){
+
+                    if(xhr.readyState == 1 || xhr.readyState == 2 || xhr.readyState == 3 ){
+                        
+                            document.getElementById('div').innerHTML = 'loading...';
+
+                    }else if(xhr.readyState == 4 ){
                         if(xhr.status == 200){
                             document.getElementById('div').innerHTML = xhr.responseText;
                         }else{

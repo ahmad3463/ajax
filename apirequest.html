@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Api using XHR</title>
+  </head>
+  <body>
+    <button id="button">Load posts</button>
+    <div id="div"></div>
+
+    <script>
+      let button = document.getElementById("button");
+
+      button.addEventListener("click", loadPost);
+
+      function loadPost() {
+        xhr = new XMLHttpRequest();
+
+        xhr.open("GET", "https://jsonplaceholder.typicode.com/posts", true);
+
+        xhr.onreadystatechange = () => {
+          if (xhr.readyState < 4) {
+            document.getElementById("div").innerHTML = "Loading...";
+          }
+          if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+              let posts = JSON.parse(xhr.responseText);
+
+              let output = "<h2>Posts:</h2><ul>";
+
+              posts.splice(0, 5).forEach((post) => {
+                output += `<li> <strong>${post.title}</strong><br>${post.body}</li>`;
+              });
+              output += "</ul>";
+
+              document.getElementById("div").innerHTML = output;
+            } else {
+              document.getElementById("div").innerHTML = "Error" + xhr.status;
+            }
+          }
+        };
+        xhr.send();
+      }
+    </script>
+  </body>
+</html>
