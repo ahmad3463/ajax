@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fetch method</title>
+</head>
+<body>
+    <h1>Fetch Apis</h1>
+    <button id="button"> Load User</button>
+    <div id="div"></div>
+    <script>
+        let button = document.getElementById('button');
+        let div = document.getElementById('div');
+        button.addEventListener('click', loadUser);
+
+        function loadUser(){
+            div.innerHTML = 'loading...';
+
+            fetch('https://jsonplaceholder.typicode.com/users')
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data);
+
+                let output  = "<h1>Users : </h1> <ul>";
+
+                    data.forEach(users => {
+                        // output += `<li><strong> ${users.name}</strong> - ${users.email} </li>`;
+                        for (let key in users) {
+                            if (typeof users == 'object') {
+                        output += `<li><strong> ${key}</strong>: ${JSON.stringify(users[key])} </li>`;
+                                                
+                            }
+                        }
+                    });
+
+                    output += "</ul>";
+
+                    div.innerHTML = output;
+            }).catch(err => {
+                div.innerHTML = "error..." + err; 
+            });
+        }
+
+    </script>
+    
+</body>
+</html>
